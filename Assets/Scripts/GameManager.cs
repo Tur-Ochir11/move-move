@@ -1,8 +1,16 @@
+using System;
 using Unity.Netcode;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    public static GameManager Instance;
+    public Color[] colors;
+    public void Awake()
+    {
+        Instance = this;
+    }
+
     public void HostGame()
     {
         NetworkManager.Singleton.StartHost();
@@ -13,4 +21,10 @@ public class GameManager : MonoBehaviour
         NetworkManager.Singleton.StartClient();
         Debug.Log("Starting Client");
     }
+
+    public Color GetRandomColor()
+    {
+        return colors[UnityEngine.Random.Range(0, colors.Length)];
+    }
+
 }
